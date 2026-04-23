@@ -66,6 +66,7 @@ a:hover { opacity: 0.8; }
   padding: 14px 24px;
   max-width: var(--max-width);
   margin: 0 auto;
+  position: relative;
 }
 .nav-brand {
   display: flex;
@@ -74,17 +75,76 @@ a:hover { opacity: 0.8; }
   color: var(--text);
   font-weight: 600;
   font-size: 16px;
+  white-space: nowrap;
 }
 .nav-brand img { width: 28px; height: 28px; border-radius: 7px; }
 .nav-links { display: flex; gap: 28px; }
 .nav-links a { color: var(--text-muted); font-size: 14px; font-weight: 500; }
 .nav-links a:hover { color: var(--text); opacity: 1; }
-@media (max-width: 560px) { .nav-links { gap: 16px; } .nav-links a { font-size: 13px; } }
+.nav-burger {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text);
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.nav-burger:hover, .nav-burger:focus-visible { background: var(--surface); outline: none; }
+.nav-burger svg { display: block; transition: transform 0.2s; }
+.nav.open .nav-burger svg { transform: rotate(90deg); }
+
+@media (max-width: 720px) {
+  .nav-burger { display: block; }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(10, 6, 18, 0.97);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 24px 24px;
+    gap: 0;
+    transform: translateY(-6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  .nav-links a {
+    font-size: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links a:last-child { border-bottom: 0; }
+  .nav.open .nav-links {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
 
 /* Hero */
 .hero {
   padding: 96px 0 72px;
   text-align: center;
+}
+@media (max-width: 640px) {
+  .hero { padding: 56px 0 48px; }
+  .hero-icon { width: 96px; height: 96px; border-radius: 22px; margin-bottom: 22px; }
+  .hero-lang-strip {
+    padding: 10px 18px;
+    font-size: 12px;
+    gap: 10px;
+    margin-bottom: 40px;
+    max-width: calc(100% - 16px);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-lang-strip span:not(:last-child)::after { margin-left: 10px; }
 }
 .hero-icon {
   width: 120px;
@@ -154,6 +214,19 @@ a:hover { opacity: 0.8; }
 section {
   padding: 80px 0;
   position: relative;
+}
+@media (max-width: 640px) {
+  section { padding: 56px 0; }
+  .container { padding: 0 20px; }
+  .section-intro { font-size: 16px; margin-bottom: 36px; }
+  .card { padding: 20px; }
+  .scenario-group { padding: 20px; }
+  .callout { padding: 26px 22px; }
+  .split { gap: 28px; }
+  .screenshot-row { gap: 14px; margin-top: 32px; }
+  .lesson-group { margin-bottom: 32px; }
+  .lesson-group-header h3 { font-size: 20px; }
+  .feature-grid { gap: 22px; }
 }
 .section-label {
   font-size: 12px;
@@ -382,6 +455,17 @@ section {
   gap: 12px;
   margin-top: 32px;
 }
+@media (max-width: 560px) {
+  .lang-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .lang-pill { text-align: center; }
+}
 .lang-pill {
   padding: 10px 18px;
   background: var(--surface);
@@ -422,12 +506,18 @@ footer {
   margin-top: 40px;
   text-align: center;
 }
+@media (max-width: 560px) {
+  footer { padding: 40px 0 36px; }
+}
 .footer-links {
   display: flex;
   justify-content: center;
   gap: 24px;
   margin-bottom: 18px;
   flex-wrap: wrap;
+}
+@media (max-width: 560px) {
+  .footer-links { gap: 16px; }
 }
 .footer-links a { color: var(--text-muted); font-size: 14px; }
 .footer-copy {
@@ -490,6 +580,13 @@ footer {
   font-size: 18px;
   font-weight: 600;
   margin-top: 8px;
+  word-break: break-word;
+}
+@media (max-width: 560px) {
+  .contact-block { padding: 24px 20px; }
+  .contact-block a { font-size: 16px; }
+  .faq details { padding: 16px 18px; }
+  .faq summary { font-size: 15px; }
 }
 
 /* Privacy page */
