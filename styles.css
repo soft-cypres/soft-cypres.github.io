@@ -195,10 +195,28 @@ a:hover { opacity: 0.8; }
   color: var(--text-muted);
   font-weight: 500;
 }
-.hero-lang-strip span:not(:last-child)::after {
+.hero-lang-strip > *:not(:last-child)::after {
   content: '·';
   margin-left: 14px;
   color: var(--text-dim);
+}
+.hero-lang-strip a {
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+.hero-lang-strip a:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+.hero-lang-strip .current {
+  color: var(--text);
+  font-weight: 600;
+}
+.lang-pill:hover { opacity: 1; }
+.lang-pill.current {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(255, 90, 255, 0.12);
 }
 .hero-shot {
   max-width: 320px;
